@@ -112,9 +112,10 @@ void servo_run(float k[],struct_robot *Robot, int trajet, int Tf)
 	for (h=0; h< (int) m ; h++)
 	{
 		/* La trajectoire degré 5 */
-		r1 = 10*pow(h,3)*pow(m,-3)  - 15 *pow(h,4)*pow(m,-4)  + 6*pow(h,5)*pow(m,-5);
-		r2 = 30*pow(h,2)*pow(m,-3) - 60 * pow(h,3)*pow(m,-4)  + 30*pow(h,4)*pow(m,-5);
-		r3 = 60*h*pow(m,-3) - 180*pow(h,2)*pow(m,-4) + 120*pow(h,3)*pow(m,-5);
+		float t = h*SAMPLING_PERIOD;
+		r1 = 10*pow(t,3)*pow(Tf,-3)  - 15 *pow(t,4)*pow(Tf,-4)  + 6*pow(t,5)*pow(Tf,-5);
+		r2 = 30*pow(t,2)*pow(Tf,-3) - 60 * pow(t,3)*pow(Tf,-4)  + 30*pow(t,4)*pow(Tf,-5);
+		r3 = 60*h*pow(t,-3) - 180*pow(Tf,2)*pow(t,-4) + 120*pow(t,3)*pow(Tf,-5);
 		if(trajet==1)
 		{
 			position_eta[h] = k[0] + (k[2]-k[0]) * r1;
@@ -192,7 +193,8 @@ void servo_run(float k[],struct_robot *Robot, int trajet, int Tf)
 	
 	for (h=0; h< (int) m ; h++)
 	{	
-		r3 = 60*h*pow(m,-3) - 180*pow(h,2)*pow(m,-4) + 120*pow(h,3)*pow(m,-5);
+		float T = h*SAMPLING_PERIOD;
+		r3 = 60*T*pow(Tf,-3) - 180*pow(T,2)*pow(Tf,-4) + 120*pow(T,3)*pow(Tf,-5);
 		accel_m1[h] = (position_m1[(int) m]-position_m1[0])*r3;
 		accel_m2[h] = (position_m2[(int) m]-position_m2[0])*r3;
 		accel_m3[h] = (position_m3[(int) m]-position_m3[0])*r3;
