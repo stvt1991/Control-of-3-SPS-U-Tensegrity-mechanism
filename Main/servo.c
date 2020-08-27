@@ -115,7 +115,7 @@ void servo_run(float k[],struct_robot *Robot, int trajet, int Tf)
 		float t = h*SAMPLING_PERIOD;
 		r1 = 10*pow(t,3)*pow(Tf,-3)  - 15 *pow(t,4)*pow(Tf,-4)  + 6*pow(t,5)*pow(Tf,-5);
 		r2 = 30*pow(t,2)*pow(Tf,-3) - 60 * pow(t,3)*pow(Tf,-4)  + 30*pow(t,4)*pow(Tf,-5);
-		r3 = 60*h*pow(t,-3) - 180*pow(Tf,2)*pow(t,-4) + 120*pow(t,3)*pow(Tf,-5);
+		r3 = 60*h*pow(t,-3) - 180*pow(t,2)*pow(Tf,-4) + 120*pow(t,3)*pow(Tf,-5);
 		if(trajet==1)
 		{
 			position_eta[h] = k[0] + (k[2]-k[0]) * r1;
