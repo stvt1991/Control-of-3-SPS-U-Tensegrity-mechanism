@@ -45,17 +45,17 @@ struct struct_robot {
 #define MOT_KT 0.0348 // N.m/A
 #define MOT_KT_INV 28.73 // A/(N.m)
 #define MOT_KE 0.034 
-#define MOT_PULSE 14.5// OMEGA = (Kt*Ke*2*Pi)/(R*Jm*60) rad/s
-#define INERTIE 4.1e-8 //Inertie 
+#define MOT_PULSE 14// OMEGA = (Kt*Ke*2*Pi)/(R*Jm*60) rad/s
+#define INERTIE 4.1e-7 //Inertie 
 #define PID_KP  3.0*MOT_PULSE*MOT_PULSE   //12.0
 #define PID_KV  3.0*MOT_PULSE  //1.0
 #define PID_KI  MOT_PULSE*MOT_PULSE*MOT_PULSE  //6.0
 
 
-#define PID_KP_CURRENT  PID_KP*MOT_KT_INV/1621 // 1621: Rapport de réduction
-#define PID_KV_CURRENT  PID_KV*MOT_KT_INV/1621
-#define PID_KI_CURRENT  PID_KI*MOT_KT_INV/1621
-#define PID_KA_CURRENT  MOT_KT_INV*INERTIE/1621
+#define PID_KP_CURRENT  PID_KP*MOT_KT_INV*1621*INERTIE // 1621: Rapport de réduction
+#define PID_KV_CURRENT  PID_KV*MOT_KT_INV*1621*INERTIE
+#define PID_KI_CURRENT  PID_KI*MOT_KT_INV*1621*INERTIE
+#define PID_KA_CURRENT  MOT_KT_INV*INERTIE*1621
 
 /* Saturation */
 #define SAT_CURRENT_MAX 0.177
