@@ -244,33 +244,25 @@ void servo_run(float k[],struct_robot *Robot, int trajet, int Tf)
 						-PID_KV_CURRENT*(des_vel[axe]-meas_vel[axe])
 						-PID_KI_CURRENT*sum_err_pos[axe];
 			current_old[axe]= current[axe];
+			(*Robot).des_eta[axe] = pos_eta[axe];
+			(*Robot).des_phi[axe] = pos_phi[axe];
+			(*Robot).mes_pos[axe] = meas_pos[axe];
+			(*Robot).des_pos[axe] = des_pos[axe];
+			(*Robot).mes_vel[axe] = meas_vel[axe];
+			(*Robot).des_vel[axe] = des_vel[axe];
+			(*Robot).mes_accl[axe] = meas_accl[axe];
+			(*Robot).des_accl[axe] = des_acc[axe];
+			(*Robot).curr_old[axe] = current_old[axe];
 			if (current[axe]>SAT_CURRENT_MAX)
 			{
 				current[axe] = SAT_CURRENT_MAX;
-				(*Robot).des_eta[axe] = pos_eta[axe];
-				(*Robot).des_phi[axe] = pos_phi[axe];
-				(*Robot).mes_pos[axe] = meas_pos[axe];
-				(*Robot).des_pos[axe] = des_pos[axe];
-				(*Robot).mes_vel[axe] = meas_vel[axe];
-				(*Robot).des_vel[axe] = des_vel[axe];
-				(*Robot).mes_accl[axe] = meas_accl[axe];
-				(*Robot).des_accl[axe] = des_acc[axe];
 				(*Robot).curr_new[axe] = current[axe];
-				(*Robot).curr_old[axe] = current_old[axe];
+				
 			}
 			else if (current[axe]< SAT_CURRENT_MIN)
 			{
 				current[axe] = SAT_CURRENT_MIN;
-				(*Robot).des_eta[axe] = pos_eta[axe];
-				(*Robot).des_phi[axe] = pos_phi[axe];
-				(*Robot).mes_pos[axe] = meas_pos[axe];
-				(*Robot).des_pos[axe] = des_pos[axe];
-				(*Robot).mes_vel[axe] = meas_vel[axe];
-				(*Robot).des_vel[axe] = des_vel[axe];
-				(*Robot).mes_accl[axe] = meas_accl[axe];
-				(*Robot).des_accl[axe] = des_acc[axe];
 				(*Robot).curr_new[axe] = current[axe];
-				(*Robot).curr_old[axe] = current_old[axe];
 			}
 		}
 		set_pwm(PWM_MOT_0, PWM_DUTY, (int)(current[0]*PWM_CURRENT_TO_PWM_DUTY + PWM_MOT_HALF_PERIOD));
